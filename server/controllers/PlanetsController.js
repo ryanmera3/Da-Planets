@@ -15,10 +15,8 @@ export class PlanetsController extends BaseController {
 
   async create(req, res, next) {
     try {
-      // NEver trust the client
       req.body.creatorId = req.userInfo.id
       const planet = await planetsService.create(req.body)
-      // custom status code
       return res.status(201).send(planet)
     } catch (error) {
       next(error)

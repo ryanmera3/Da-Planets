@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 
 class PlanetsService {
   async getAll(query = {}) {
-    const planets = await dbContext.Planets.find({}).populate('creator', 'name picture galaxyId starId')
+    const planets = await dbContext.Planets.find({}).populate('creator', 'name picture')
     return planets
   }
 
