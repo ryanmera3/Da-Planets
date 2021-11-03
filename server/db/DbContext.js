@@ -1,6 +1,8 @@
 import mongoose from 'mongoose'
 import { AccountSchema, ProfileSchema } from '../models/Account'
 import { GalaxySchema } from '../models/Galaxy'
+import { PlanetSchema } from '../models/Planet'
+import { StarSchema } from '../models/Star'
 import { ValueSchema } from '../models/Value'
 
 class DbContext {
@@ -9,6 +11,10 @@ class DbContext {
   Profiles = mongoose.model('Profile', ProfileSchema, 'accounts');
 
   Galaxies = mongoose.model('Galaxy', GalaxySchema)
+
+  Stars = mongoose.model('Star', StarSchema)
+
+  Planets = mongoose.model('Planet', PlanetSchema)
 }
 
 export const dbContext = new DbContext()

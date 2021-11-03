@@ -15,6 +15,11 @@ class GalaxiesService {
     return found
   }
 
+  async getByGalaxyId(id) {
+    const galaxies = await dbContext.Planets.find({ starId: id }).populate('galaxy')
+    return galaxies
+  }
+
   async create(body) {
     const newGalaxy = await dbContext.Galaxies.create(body)
     return await this.getById(newGalaxy.id)
@@ -31,9 +36,9 @@ class GalaxiesService {
 
   async remove(id, userId) {
     const found = await this.getById(id)
-    // if (found.creatorId.toString() !== userId) {
-    //   throw new Forbidden('You do not have permission to delete this')
-    // }
+    if (found.creatorId.toString() !== userId) {
+      throw new Forbidden('You do not have permission to delete this')
+    }
     await dbContext.Galaxies.findByIdAndDelete(id)
   }
 }
